@@ -12,6 +12,7 @@ import { environment } from '../environments/environment';
 // pages
 import { AppComponent } from './app.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { ChatService } from './providers/chat.service';
 
 
 @NgModule({
@@ -26,7 +27,7 @@ import { ChatComponent } from './components/chat/chat.component';
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule // imports firebase/auth, only needed for auth features,
   ],
-  providers: [],
+  providers: [ChatService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

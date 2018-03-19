@@ -16,13 +16,15 @@ export class ChatComponent {
    }
 
   enviarMensaje(){
-    console.log(this.mensaje);
+    if( this.mensaje.length === 0 ){ return; }
+
+    this._chat.agregarMensaje( this.mensaje )
+              .then( () => this.mensaje = '' )
+              .catch( (err)=> console.error('Error al enviar', err) );
   }
 
   cargarMensajes(){
-    this._chat.cargarMensajes().subscribe(params =>{
-      console.log(params);
-    });
+    this._chat.cargarMensajes().subscribe();
   }
 
 }

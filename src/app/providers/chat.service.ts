@@ -19,7 +19,6 @@ export class ChatService {
       }
       this.usuario.nombre = user.displayName;
       this.usuario.uid = user.uid;
-      console.log(this.usuario);
     });
    }
 
@@ -34,17 +33,26 @@ export class ChatService {
 
   agregarMensaje(texto: string) {
     let mensajeDemo:Mensaje = {
-      nombre: 'Demo',
+      nombre: this.usuario.nombre,
       mensaje: texto,
-      fecha: new Date().getTime()
+      fecha: new Date().getTime(),
+      uid: this.usuario.uid
     }
     return this.itemsCollection.add(mensajeDemo);
   }// fin agregarMensaje
   
   login(proveedor) {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    switch (proveedor) {
+      case 'google':
+        this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+        break;
+      case 'twitter':
+        this.afAuth.auth.signInWithPopup(new firebase.auth.TwitterAuthProvider());
+        break;
+    }
   }// fin login
   logout() {
+    this.usuario = {};
     this.afAuth.auth.signOut();
   }// fin logout
 

@@ -2,25 +2,15 @@
 <hr>
 <div class="app-mensajes" id="app-mensajes">
 
-    <div class="text-right" *ngFor="let chat of _chat.chats">
-        <span class="badge badge-primary">Hernan</span>
+    <div *ngFor="let chat of _chat.chats" [ngClass]="{ 'text-right': _chat.usuario.uid == chat.uid }">
+        <span class="badge" [ngClass]="{ 'badge-primary': _chat.usuario.uid == chat.uid,
+                                         'badge-success': _chat.usuario.uid != chat.uid }">
+            {{ chat.nombre }}
+        </span>
         <p>
             {{ chat.mensaje }}
         </p>
     </div>
-    <!-- <div class="text-right">
-        <span class="badge badge-primary">Hernan</span>
-        <p>
-            Este es un mensaje de chat
-        </p>
-    </div>
-
-    <div>
-        <span class="badge badge-success">Maria</span>
-        <p>
-            Esta es una respuesta
-        </p>
-    </div> -->
 
 </div>
 
